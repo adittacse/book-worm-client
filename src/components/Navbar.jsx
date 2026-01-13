@@ -2,10 +2,16 @@
 
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
     const { data: session, status } = useSession();
     const role = session?.role;
+    const pathname = usePathname();
+
+    if (pathname.startsWith("/dashboard/admin")) {
+        return <></>;
+    }
 
     if (status === "loading") {
         return (
@@ -26,23 +32,25 @@ export default function Navbar() {
             </div>
 
             <div className="navbar-center hidden md:flex">
-                {role === "admin" ? (
-                    <ul className="menu menu-horizontal px-1">
-                        <li><Link href="/admin/dashboard">Dashboard</Link></li>
-                        <li><Link href="/admin/books">Books</Link></li>
-                        <li><Link href="/admin/genres">Genres</Link></li>
-                        <li><Link href="/admin/reviews">Reviews</Link></li>
-                        <li><Link href="/admin/users">Users</Link></li>
-                        <li><Link href="/admin/tutorials">Tutorials</Link></li>
-                    </ul>
-                ) : (
-                    <ul className="menu menu-horizontal px-1">
-                        <li><Link href="/dashboard">Home</Link></li>
-                        <li><Link href="/browse-books">Browse Books</Link></li>
-                        <li><Link href="/my-library">My Library</Link></li>
-                        <li><Link href="/tutorials">Tutorials</Link></li>
-                    </ul>
-                )}
+                {
+                    role === "admin" ? (
+                        <ul className="menu menu-horizontal px-1">
+                            <li><Link href="/dashboard/admin">Dashboard</Link></li>
+                            <li><Link href="/admin/books">Books</Link></li>
+                            <li><Link href="/admin/genres">Genres</Link></li>
+                            <li><Link href="/admin/reviews">Reviews</Link></li>
+                            <li><Link href="/admin/users">Users</Link></li>
+                            <li><Link href="/admin/tutorials">Tutorials</Link></li>
+                        </ul>
+                    ) : (
+                        <ul className="menu menu-horizontal px-1">
+                            <li><Link href="/dashboard">Home</Link></li>
+                            <li><Link href="/browse-books">Browse Books</Link></li>
+                            <li><Link href="/my-library">My Library</Link></li>
+                            <li><Link href="/tutorials">Tutorials</Link></li>
+                        </ul>
+                    )
+                }
             </div>
 
             <div className="navbar-end gap-2">
