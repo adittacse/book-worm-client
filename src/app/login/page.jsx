@@ -3,11 +3,14 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPass, setShowPass] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [socialLoading, setSocialLoading] = useState("");
     const [error, setError] = useState("");
 
     const router = useRouter();
@@ -36,61 +39,166 @@ export default function LoginPage() {
         router.push(callbackUrl);
     };
 
+    const handleSocial = async (provider) => {
+        setError("");
+        setSocialLoading(provider);
+        await signIn(provider, { callbackUrl });
+        setSocialLoading("");
+    };
+
     return (
-        <div className="max-w-md mx-auto p-6">
-            <div className="card bg-base-100 shadow">
-                <div className="card-body">
-                    <h2 className="text-2xl font-bold">Login</h2>
-
-                    {error ? (
-                        <div className="alert alert-error">
-                            <span>{error}</span>
+        <div className="min-h-[calc(100vh-0px)] flex items-center justify-center px-4 py-10 bg-gradient-to-b from-base-200 to-base-300">
+            <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Left: Cozy Brand Panel */}
+                <div className="hidden md:flex card bg-base-100 shadow-xl overflow-hidden">
+                    <div className="card-body">
+                        <div className="flex items-center gap-3">
+                            <div className="avatar placeholder">
+                                <div className="bg-primary text-primary-content rounded-full w-12">
+                                    <span className="text-xl">BW</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h1 className="text-2xl font-bold">BookWorm</h1>
+                                <p className="text-sm opacity-70">Your cozy reading companion</p>
+                            </div>
                         </div>
-                    ) : null}
 
-                    <form onSubmit={handleLogin} className="space-y-3">
-                        <input
-                            className="input input-bordered w-full"
-                            type="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
+                        <div className="mt-6 space-y-3">
+                            <div className="flex items-start gap-3">
+                                <span className="badge badge-primary badge-outline mt-1">1</span>
+                                <p className="text-sm opacity-80">
+                                    Track shelves: <span className="font-semibold">Want</span>,{" "}
+                                    <span className="font-semibold">Reading</span>,{" "}
+                                    <span className="font-semibold">Read</span>
+                                </p>
+                            </div>
 
-                        <input
-                            className="input input-bordered w-full"
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
+                            <div className="flex items-start gap-3">
+                                <span className="badge badge-primary badge-outline mt-1">2</span>
+                                <p className="text-sm opacity-80">
+                                    Add progress and reviews with moderation
+                                </p>
+                            </div>
 
-                        <button className="btn btn-primary w-full" disabled={loading}>
-                            {loading ? "Logging in..." : "Login"}
-                        </button>
-                    </form>
+                            <div className="flex items-start gap-3">
+                                <span className="badge badge-primary badge-outline mt-1">3</span>
+                                <p className="text-sm opacity-80">
+                                    Get personalized recommendations
+                                </p>
+                            </div>
+                        </div>
 
-                    <div className="divider">OR</div>
+                        <div className="mt-auto pt-6">
+                            <div className="alert">
+                <span className="text-sm">
+                  Tip: Use a strong password and keep your account safe.
+                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                    <button
-                        className="btn btn-outline w-full"
-                        onClick={() => signIn("google")}
-                    >
-                        Continue with Google
-                    </button>
+                {/* Right: Login Card */}
+                <div className="card bg-base-100 shadow-xl">
+                    <div className="card-body">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <h2 className="text-2xl font-bold">Welcome back</h2>
+                                <p className="text-sm opacity-70">
+                                    Login to continue your reading journey
+                                </p>
+                            </div>
+                            <div className="md:hidden avatar placeholder">
+                                <div className="bg-primary text-primary-content rounded-full w-10">
+                                    <span className="text-lg">BW</span>
+                                </div>
+                            </div>
+                        </div>
 
-                    <button
-                        className="btn btn-outline w-full"
-                        onClick={() => signIn("github")}
-                    >
-                        Continue with GitHub
-                    </button>
+                        {error ? (
+                            <div className="alert alert-error mt-4">
+                                <span className="text-sm">{error}</span>
+                            </div>
+                        ) : null}
 
-                    <p className="text-sm mt-2">
-                        New here? <a className="link" href="/register">Register</a>
-                    </p>
+                        <form onSubmit={handleLogin} className="mt-4 space-y-3">
+                            <label className="form-control w-full">
+                                <div className="label">
+                                    <span className="label-text">Email</span>
+                                </div>
+                                <input
+                                    className="input input-bordered w-full"
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </label>
+
+                            <label className="form-control w-full">
+                                <div className="label flex items-center justify-between">
+                                    <span className="label-text">Password</span>
+                                    <button
+                                        type="button"
+                                        className="btn btn-ghost btn-xs"
+                                        onClick={() => setShowPass((p) => !p)}
+                                    >
+                                        {showPass ? "Hide" : "Show"}
+                                    </button>
+                                </div>
+                                <input
+                                    className="input input-bordered w-full"
+                                    type={showPass ? "text" : "password"}
+                                    placeholder="Enter your password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                            </label>
+
+                            <button className="btn btn-primary w-full" disabled={loading}>
+                                {loading ? (
+                                    <span className="loading loading-spinner loading-sm"></span>
+                                ) : null}
+                                {loading ? "Logging in..." : "Login"}
+                            </button>
+                        </form>
+
+                        <div className="divider my-4">OR</div>
+
+                        <div className="space-y-2">
+                            <button
+                                className="btn btn-outline w-full"
+                                onClick={() => handleSocial("google")}
+                                disabled={!!socialLoading}
+                            >
+                                {socialLoading === "google" ? (
+                                    <span className="loading loading-spinner loading-sm"></span>
+                                ) : null}
+                                Continue with Google
+                            </button>
+
+                            <button
+                                className="btn btn-outline w-full"
+                                onClick={() => handleSocial("github")}
+                                disabled={!!socialLoading}
+                            >
+                                {socialLoading === "github" ? (
+                                    <span className="loading loading-spinner loading-sm"></span>
+                                ) : null}
+                                Continue with GitHub
+                            </button>
+                        </div>
+
+                        <p className="text-sm mt-4 opacity-80">
+                            New here?{" "}
+                            <Link className="link link-primary font-medium" href="/register">
+                                Create an account
+                            </Link>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
