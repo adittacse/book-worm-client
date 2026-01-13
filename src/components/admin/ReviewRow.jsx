@@ -1,12 +1,13 @@
 import Link from "next/link";
 
-export default function ReviewRow({ review, busy, showApprove, onApprove, onDelete }) {
+export default function ReviewRow({ index, review, busy, showApprove, onApprove, onDelete }) {
     const status = review?.status || "pending";
     const book = review?.book || {};
     const cover = book?.coverImage;
 
     return (
         <tr>
+            <td>{index + 1}</td>
             {/* User */}
             <td>
                 <div className="flex items-center gap-3">

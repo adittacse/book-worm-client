@@ -191,6 +191,7 @@ export default function ManageReviewsPage() {
                             <table className="table">
                                 <thead>
                                 <tr className="text-base-content/70">
+                                    <th>Sl.</th>
                                     <th>User</th>
                                     <th>Book</th>
                                     <th>Rating</th>
@@ -201,9 +202,10 @@ export default function ManageReviewsPage() {
                                 </thead>
 
                                 <tbody>
-                                {list.map((r) => (
+                                {list.map((r, index) => (
                                     <ReviewRow
                                         key={r._id}
+                                        index={index}
                                         review={r}
                                         busy={busyIds.has(r._id)}
                                         showApprove={active === "pending"}

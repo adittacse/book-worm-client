@@ -48,7 +48,6 @@ export default function AdminGenresPage() {
         setLoading(true);
         setMsg("");
         try {
-            // expected: GET /genres -> [{ _id, name, createdAt?... }]
             const res = await api.get("/genres");
             setGenres(res.data || []);
         } catch (e) {
@@ -94,7 +93,6 @@ export default function AdminGenresPage() {
 
         try {
             if (mode === "add") {
-                // POST /genres { name }
                 const res = await api.post("/genres", { name: clean });
 
                 // optimistic insert if backend returns inserted doc; else reload
@@ -108,7 +106,6 @@ export default function AdminGenresPage() {
 
                 closeModal();
             } else {
-                // PATCH /genres/:id { name }
                 const res = await api.patch(`/genres/${activeId}`, { name: clean });
 
                 // optimistic update
