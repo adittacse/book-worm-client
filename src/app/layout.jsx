@@ -21,8 +21,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en">
-            <body>
+        <html lang="en" data-theme="light">
+            <body className="bg-base-200 text-base-content">
                 <Providers>
                     <div className="min-h-screen flex flex-col">
                         <Navbar />
