@@ -47,7 +47,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-[calc(100vh-0px)] flex items-center justify-center px-4 py-10 bg-gradient-to-b from-base-200 to-base-300">
+        <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-base-200">
             <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Left: Cozy Brand Panel */}
                 <div className="hidden md:flex card bg-base-100 shadow-xl overflow-hidden">
