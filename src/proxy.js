@@ -3,7 +3,7 @@ import { getToken } from "next-auth/jwt";
 
 const PUBLIC_PATHS = ["/login", "/register"];
 
-export async function middleware(req) {
+export async function proxy(req) {
     const { pathname } = req.nextUrl;
 
     // allow next internal + static files
