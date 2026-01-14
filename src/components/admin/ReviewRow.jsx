@@ -1,4 +1,5 @@
 import Link from "next/link";
+import {Image} from "next/dist/client/image-component";
 
 export default function ReviewRow({ index, review, busy, showApprove, onApprove, onDelete }) {
     const status = review?.status || "pending";
@@ -13,8 +14,8 @@ export default function ReviewRow({ index, review, busy, showApprove, onApprove,
                 <div className="flex items-center gap-3">
                     <div className="avatar">
                         <div className="w-10 rounded-full">
-                            <img
-                                src={review?.userPhoto || "https://i.ibb.co/2Yk6G6n/user.png"}
+                            <Image width={40} height={40}
+                                src={review?.userPhoto}
                                 alt="user"
                             />
                         </div>
@@ -32,7 +33,7 @@ export default function ReviewRow({ index, review, busy, showApprove, onApprove,
                     {/* thumb */}
                     <div className="w-12 h-16 rounded-md overflow-hidden bg-base-200 border">
                         {cover ? (
-                            <img
+                            <Image width={48} height={56}
                                 src={cover}
                                 alt={book?.title || "book"}
                                 className="w-full h-full object-cover group-hover:scale-[1.02] transition"

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import api from "@/lib/api";
+import { Image } from "next/dist/client/image-component";
 
 const SORT_OPTIONS = [
     { value: "newest", label: "Newest" },
@@ -246,7 +247,7 @@ export default function AdminBooksPage() {
                                             <div className="flex items-center gap-3">
                                                 <div className="avatar">
                                                     <div className="w-10 h-14 rounded">
-                                                        <img
+                                                        <Image width={40} height={56}
                                                             src={b.coverImage}
                                                             alt={b.title}
                                                             className="object-cover"

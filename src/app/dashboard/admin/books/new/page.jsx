@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 import Link from "next/link";
+import { Image } from "next/dist/client/image-component";
 
 export default function AdminNewBookPage() {
     const router = useRouter();
@@ -20,6 +21,11 @@ export default function AdminNewBookPage() {
 
     const [saving, setSaving] = useState(false);
     const [msg, setMsg] = useState("");
+
+    const FALLBACK = "https://placehold.co/600x800?text=No+Cover";
+
+    const srcImage = coverImage?.trim() || FALLBACK;
+    const isPlacehold = srcImage.startsWith("https://placehold.co/");
 
     const loadGenres = async () => {
         setLoadingGenres(true);
@@ -103,13 +109,11 @@ export default function AdminNewBookPage() {
                         <div className="card bg-base-200 border">
                             <div className="card-body p-4">
                                 <div className="flex mx-auto w-64 h-72 rounded-xl overflow-hidden bg-base-300 ring-1 ring-base-300 shrink-0">
-                                    <img
-                                        src={
-                                            coverImage.trim() ||
-                                            "https://placehold.co/600x800?text=No+Cover"
-                                        }
+                                    <Image width={256} height={288}
+                                        src={srcImage}
                                         alt="cover preview"
                                         className="w-full h-full object-cover"
+                                        unoptimized={isPlacehold}
                                     />
                                 </div>
 
@@ -201,8 +205,8 @@ export default function AdminNewBookPage() {
                                 <label className="form-control md:col-span-2 mb-5">
                                     <div className="label mb-2">
                                         <span className="label-text font-medium">Cover Image URL</span>
-                                        <span className="label-text-alt opacity-70">
-                                            Used in lists + details
+                                        <span className="label-text-alt text-red-400 opacity-70">
+                                            Unsplash link supports here
                                         </span>
                                     </div>
                                     <input

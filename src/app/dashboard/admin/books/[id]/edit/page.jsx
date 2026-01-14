@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import api from "@/lib/api";
 import Link from "next/link";
+import { Image } from "next/dist/client/image-component";
 
 export default function AdminEditBookPage() {
     const { id } = useParams();
@@ -144,7 +145,7 @@ export default function AdminEditBookPage() {
                         <div className="card bg-base-200 border">
                             <div className="card-body p-4">
                                 <div className="flex mx-auto w-64 h-72 rounded-xl overflow-hidden bg-base-300 ring-1 ring-base-300 shrink-0">
-                                    <img
+                                    <Image width={256} height={288}
                                         src={coverImage?.trim()}
                                         alt="cover preview"
                                         className="w-full h-full object-cover"
