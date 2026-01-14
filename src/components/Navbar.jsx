@@ -36,11 +36,11 @@ export default function Navbar() {
                     role === "admin" && (
                         <ul className="menu menu-horizontal px-1">
                             <li><Link href="/dashboard/admin">Dashboard</Link></li>
-                            <li><Link href="/dashboard/admin/books">Books</Link></li>
-                            <li><Link href="/dashboard/admin/genres">Genres</Link></li>
-                            <li><Link href="/dashboard/admin/reviews">Reviews</Link></li>
-                            <li><Link href="/dashboard/admin/tutorials">Tutorials</Link></li>
-                            <li><Link href="/dashboard/admin/users">Users</Link></li>
+                            <li><Link href="/dashboard/admin/books">Manage Books</Link></li>
+                            <li><Link href="/dashboard/admin/genres">Manage Genres</Link></li>
+                            <li><Link href="/dashboard/admin/reviews">Moderate Reviews</Link></li>
+                            <li><Link href="/dashboard/admin/tutorials">Manage Tutorials</Link></li>
+                            <li><Link href="/dashboard/admin/users">Manage Users</Link></li>
                         </ul>
                     )
                 }

@@ -10,8 +10,10 @@ export default async function Home() {
         redirect("/login");
     }
 
+    const role = session?.user?.role || session?.role;
+
     // admin vs user
-    if (session.role === "admin") {
+    if (role === "admin") {
         redirect("/dashboard/admin");
     } else {
         redirect("/dashboard/user/my-library");

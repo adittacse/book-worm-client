@@ -119,7 +119,7 @@ export const authOptions = {
         async session({ session, token }) {
             session.accessToken = token.accessToken || "";
             session.role = token.role || "user";
-            // session.user.role = token.role || "user";
+            session.user.role = token.role || "user";
             return session;
         },
     },
