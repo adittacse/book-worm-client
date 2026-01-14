@@ -1,4 +1,3 @@
-import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminTopbar from "@/components/admin/AdminTopbar";
 
 export const metadata = {
@@ -15,16 +14,11 @@ export default function AdminLayout({ children }) {
                 <div className="drawer-content flex flex-col">
                     <AdminTopbar />
 
-                    <main className="p-4 md:p-6">
+                    <main className="w-7xl mx-auto pt-6">
                         {children}
                     </main>
                 </div>
 
-                {/* sidebar */}
-                <div className="drawer-side">
-                    <label htmlFor="admin-drawer" className="drawer-overlay"></label>
-                    <AdminSidebar />
-                </div>
             </div>
         </div>
     );

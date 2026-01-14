@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import api from "@/lib/api";
 import Link from "next/link";
+import { Image } from "next/dist/client/image-component";
 
 const shelfTabs = [
     { key: "want", label: "Want to Read" },
@@ -120,7 +121,7 @@ export default function MyLibraryPage() {
                         <div key={x._id} className="card bg-base-100 shadow">
                             <div className="card-body">
                                 <div className="flex gap-4">
-                                    <img
+                                    <Image width={80} height={104}
                                         src={x.book?.coverImage}
                                         alt={x.book?.title}
                                         className="w-20 h-28 rounded-lg object-cover"
