@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 import Link from "next/link";
-import { Image } from "next/dist/client/image-component";
+import Image from "next/image";
 
 export default function AdminNewBookPage() {
     const router = useRouter();

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import api from "@/lib/api";
-import { Image } from "next/dist/client/image-component";
+import Image from "next/image";
 
 export default function AdminUsersPage() {
     const [users, setUsers] = useState([]);

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import api from "@/lib/api";
 import Link from "next/link";
-import { Image } from "next/dist/client/image-component";
+import Image from "next/image";
 
 const shelfTabs = [
     { key: "want", label: "Want to Read" },
