@@ -44,10 +44,10 @@ export default function Navbar() {
                         </ul>
                     ) : (
                         <ul className="menu menu-horizontal px-1">
-                            <li><Link href="/dashboard">Home</Link></li>
-                            <li><Link href="/browse-books">Browse Books</Link></li>
-                            <li><Link href="/my-library">My Library</Link></li>
-                            <li><Link href="/tutorials">Tutorials</Link></li>
+                            <li><Link href="/dashboard/user">Home</Link></li>
+                            <li><Link href="/dashboard/user/browse-books">Browse Books</Link></li>
+                            <li><Link href="/dashboard/user/my-library">My Library</Link></li>
+                            <li><Link href="/dashboard/user/tutorials">Tutorials</Link></li>
                         </ul>
                     )
                 }

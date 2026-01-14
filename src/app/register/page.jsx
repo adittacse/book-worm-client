@@ -202,7 +202,7 @@ export default function RegisterPage() {
                                     <span className="label-text">Full Name</span>
                                 </div>
                                 <input
-                                    className="input input-bordered w-full"
+                                    className="input input-bordered w-full mb-2"
                                     placeholder="Enter your full name"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
@@ -216,7 +216,7 @@ export default function RegisterPage() {
                                     <span className="label-text">Email</span>
                                 </div>
                                 <input
-                                    className="input input-bordered w-full"
+                                    className="input input-bordered w-full mb-2"
                                     type="email"
                                     placeholder="Enter your email"
                                     value={email}
@@ -231,7 +231,7 @@ export default function RegisterPage() {
                                     <span className="label-text">Password</span>
                                 </div>
                                 <input
-                                    className="input input-bordered w-full"
+                                    className="input input-bordered w-full mb-4"
                                     type="password"
                                     placeholder="Minimum 6 characters"
                                     value={password}

@@ -32,7 +32,7 @@ export async function middleware(req) {
     // home route behavior (requirement)
     if (pathname === "/") {
         const url = req.nextUrl.clone();
-        url.pathname = token.role === "admin" ? "/dashboard/admin" : "/my-library";
+        url.pathname = token.role === "admin" ? "/dashboard/admin" : "/dashboard/user/my-library";
         return NextResponse.redirect(url);
     }
 

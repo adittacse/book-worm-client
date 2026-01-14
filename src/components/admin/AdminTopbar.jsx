@@ -26,14 +26,6 @@ export default function AdminTopbar() {
             </div>
 
             <div className="navbar-center hidden md:flex">
-                {/*<ul className="menu menu-horizontal px-1">*/}
-                {/*    <li><Link href="/dashboard/admin">Dashboard</Link></li>*/}
-                {/*    <li><Link href="/dashboard/admin/books">Books</Link></li>*/}
-                {/*    <li><Link href="/dashboard/admin/genres">Genres</Link></li>*/}
-                {/*    <li><Link href="/dashboard/admin/reviews">Reviews</Link></li>*/}
-                {/*    <li><Link href="/dashboard/admin/tutorials">Tutorials</Link></li>*/}
-                {/*    <li><Link href="/dashboard/admin/users">Users</Link></li>*/}
-                {/*</ul>*/}
                 <ul className="menu menu-horizontal px-1">
                     {links.map((l) => {
                         const active = pathname === l.href;

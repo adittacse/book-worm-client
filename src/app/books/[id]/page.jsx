@@ -65,55 +65,57 @@ export default function BookDetailsPage() {
         return null;
     }
 
-    return (<div className="max-w-5xl mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* LEFT CARD */}
-            <div className="card bg-base-100 shadow">
-                <figure className="p-4">
-                    <img
-                        src={book?.coverImage}
-                        alt={book?.title}
-                        className="rounded-xl w-full h-80 object-cover"
-                    />
-                </figure>
-
-                <div className="card-body pt-0">
-                    <h1 className="text-2xl font-bold">{book?.title}</h1>
-                    <p className="opacity-70">{book?.author}</p>
-
-                    <div className="mt-2 flex items-center justify-between">
-                        <span className="badge badge-outline">
-                            ⭐ {Number(book?.avgRating || 0).toFixed(1)}
-                        </span>
-                        <span className="text-sm opacity-70">
-                            Shelved: {book?.totalShelved || 0}
-                        </span>
-                    </div>
-
-                    {/* Library actions (shelf + progress) */}
-                    <LibraryActions book={book} libraryItem={myItem} onChanged={load}/>
-                </div>
-            </div>
-
-            {/* RIGHT SIDE */}
-            <div className="md:col-span-2 space-y-6">
+    return (
+        <div className="max-w-5xl mx-auto px-4 py-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* LEFT CARD */}
                 <div className="card bg-base-100 shadow">
-                    <div className="card-body">
-                        <h2 className="text-xl font-bold">Description</h2>
-                        <p className="opacity-80 whitespace-pre-line">{book?.description}</p>
-                        <p className="text-sm opacity-70 mt-2">
-                            Total pages: {book?.totalPages || 0}
-                        </p>
+                    <figure className="p-4">
+                        <img
+                            src={book?.coverImage}
+                            alt={book?.title}
+                            className="rounded-xl w-full h-80 object-cover"
+                        />
+                    </figure>
+
+                    <div className="card-body pt-0">
+                        <h1 className="text-2xl font-bold">{book?.title}</h1>
+                        <p className="opacity-70">{book?.author}</p>
+
+                        <div className="mt-2 flex items-center justify-between">
+                            <span className="badge badge-outline">
+                                ⭐ {Number(book?.avgRating || 0).toFixed(1)}
+                            </span>
+                            <span className="text-sm opacity-70">
+                                Shelved: {book?.totalShelved || 0}
+                            </span>
+                        </div>
+
+                        {/* Library actions (shelf + progress) */}
+                        <LibraryActions book={book} libraryItem={myItem} onChanged={load}/>
                     </div>
                 </div>
 
-                {/* Reviews Box (list + submit) */}
-                <div className="card bg-base-100 shadow">
-                    <div className="card-body">
-                        <ReviewsBox bookId={book._id} onReviewSubmitted={load}/>
+                {/* RIGHT SIDE */}
+                <div className="md:col-span-2 space-y-6">
+                    <div className="card bg-base-100 shadow">
+                        <div className="card-body">
+                            <h2 className="text-xl font-bold">Description</h2>
+                            <p className="opacity-80 whitespace-pre-line">{book?.description}</p>
+                            <p className="text-sm opacity-70 mt-2">
+                                Total pages: {book?.totalPages || 0}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Reviews Box (list + submit) */}
+                    <div className="card bg-base-100 shadow">
+                        <div className="card-body">
+                            <ReviewsBox bookId={book._id} onReviewSubmitted={load}/>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>);
+    );
 }
