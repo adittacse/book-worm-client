@@ -33,7 +33,7 @@ export default function Navbar() {
 
             <div className="navbar-center hidden md:flex">
                 {
-                    role === "admin" ? (
+                    role === "admin" && (
                         <ul className="menu menu-horizontal px-1">
                             <li><Link href="/dashboard/admin">Dashboard</Link></li>
                             <li><Link href="/dashboard/admin/books">Books</Link></li>
@@ -42,7 +42,10 @@ export default function Navbar() {
                             <li><Link href="/dashboard/admin/tutorials">Tutorials</Link></li>
                             <li><Link href="/dashboard/admin/users">Users</Link></li>
                         </ul>
-                    ) : (
+                    )
+                }
+                {
+                    role === "user" && (
                         <ul className="menu menu-horizontal px-1">
                             <li><Link href="/dashboard/user">Home</Link></li>
                             <li><Link href="/dashboard/user/browse-books">Browse Books</Link></li>
@@ -51,11 +54,19 @@ export default function Navbar() {
                         </ul>
                     )
                 }
+                {
+                    !role && (
+                        <ul className="menu menu-horizontal px-1">
+                            <li><Link href="/login">Login</Link></li>
+                            <li><Link href="/register">Register</Link></li>
+                        </ul>
+                    )
+                }
             </div>
 
             <div className="navbar-end gap-2">
-                {session?.user ? (
-                    <>
+                {
+                    session?.user && <>
                         <div className="hidden sm:flex items-center gap-2">
                             <div className="avatar">
                                 <div className="w-9 rounded-full">
@@ -72,11 +83,7 @@ export default function Navbar() {
                             Logout
                         </button>
                     </>
-                ) : (
-                    <Link className="btn btn-sm btn-primary" href="/login">
-                        Login
-                    </Link>
-                )}
+                }
             </div>
         </div>
     );

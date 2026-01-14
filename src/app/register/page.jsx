@@ -248,17 +248,6 @@ export default function RegisterPage() {
                             </button>
                         </form>
 
-                        <div className="divider my-4">OR</div>
-
-                        <div className="space-y-2">
-                            <button className="btn btn-outline w-full" onClick={() => signIn("google")}>
-                                Continue with Google
-                            </button>
-                            <button className="btn btn-outline w-full" onClick={() => signIn("github")}>
-                                Continue with GitHub
-                            </button>
-                        </div>
-
                         <p className="text-sm mt-4 opacity-80">
                             Already have an account?{" "}
                             <Link className="link link-primary font-medium" href="/login">

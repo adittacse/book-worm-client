@@ -10,7 +10,6 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [showPass, setShowPass] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [socialLoading, setSocialLoading] = useState("");
     const [error, setError] = useState("");
 
     const router = useRouter();
@@ -37,13 +36,6 @@ export default function LoginPage() {
         }
 
         router.push(callbackUrl);
-    };
-
-    const handleSocial = async (provider) => {
-        setError("");
-        setSocialLoading(provider);
-        await signIn(provider, { callbackUrl });
-        setSocialLoading("");
     };
 
     return (
@@ -128,7 +120,7 @@ export default function LoginPage() {
                                     <span className="label-text">Email</span>
                                 </div>
                                 <input
-                                    className="input input-bordered w-full"
+                                    className="input input-bordered w-full mb-2"
                                     type="email"
                                     placeholder="Enter your email"
                                     value={email}
@@ -149,7 +141,7 @@ export default function LoginPage() {
                                     </button>
                                 </div>
                                 <input
-                                    className="input input-bordered w-full"
+                                    className="input input-bordered w-full mb-4"
                                     type={showPass ? "text" : "password"}
                                     placeholder="Enter your password"
                                     value={password}
@@ -165,32 +157,6 @@ export default function LoginPage() {
                                 {loading ? "Logging in..." : "Login"}
                             </button>
                         </form>
-
-                        <div className="divider my-4">OR</div>
-
-                        <div className="space-y-2">
-                            <button
-                                className="btn btn-outline w-full"
-                                onClick={() => handleSocial("google")}
-                                disabled={!!socialLoading}
-                            >
-                                {socialLoading === "google" ? (
-                                    <span className="loading loading-spinner loading-sm"></span>
-                                ) : null}
-                                Continue with Google
-                            </button>
-
-                            <button
-                                className="btn btn-outline w-full"
-                                onClick={() => handleSocial("github")}
-                                disabled={!!socialLoading}
-                            >
-                                {socialLoading === "github" ? (
-                                    <span className="loading loading-spinner loading-sm"></span>
-                                ) : null}
-                                Continue with GitHub
-                            </button>
-                        </div>
 
                         <p className="text-sm mt-4 opacity-80">
                             New here?{" "}

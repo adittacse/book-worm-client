@@ -1,5 +1,24 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+---
+
+## 🚀 Live Website
+🔗 **Live URL:** https://public-infrastructure-74101.web.app
+
+---
+
+## 🔐 Admin Login Credentials
+- **Email:** cseaditta@gmail.com
+- **Password:** Aditta@#56
+
+---
+
+## 🔐 User Login Credentials
+- **Email:** mukul@gmail.com
+- **Password:** Mukul@25#
+
+---
+
 ## Getting Started
 
 First, run the development server:

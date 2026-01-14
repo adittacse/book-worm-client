@@ -12,8 +12,8 @@ export default async function Home() {
 
     // admin vs user
     if (session.role === "admin") {
-        redirect("/admin/dashboard");
+        redirect("/dashboard/admin");
     } else {
-        redirect("/my-library");
+        redirect("/dashboard/user/my-library");
     }
 }
