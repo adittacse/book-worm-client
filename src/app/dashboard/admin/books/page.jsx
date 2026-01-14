@@ -14,6 +14,7 @@ const SORT_OPTIONS = [
 export default function AdminBooksPage() {
     const router = useRouter();
     const sp = useSearchParams();
+    const [genreMap, setGenreMap] = useState({});
 
     const page = Number(sp.get("page") || 1);
     const limit = Number(sp.get("limit") || 10);
@@ -65,8 +66,23 @@ export default function AdminBooksPage() {
         }
     };
 
+    const loadGenres = async () => {
+        try {
+            const res = await api.get("/genres");
+            const list = res.data || [];
+            const map = {};
+            list.forEach((g) => {
+                map[g._id] = g.name;
+            });
+            setGenreMap(map);
+        } catch {
+            setGenreMap({});
+        }
+    };
+
     useEffect(() => {
         load();
+        loadGenres();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, limit, search, sort]);
 
@@ -215,11 +231,11 @@ export default function AdminBooksPage() {
                                     <tr>
                                         <th>Sl.</th>
                                         <th>Book</th>
-                                        <th>GenreId</th>
+                                        <th>Genre</th>
                                         <th>Pages</th>
                                         <th>Avg Rating</th>
                                         <th>Shelved</th>
-                                        <th className="text-right">Actions</th>
+                                        <th className="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -238,12 +254,20 @@ export default function AdminBooksPage() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <div className="font-semibold">{b.title}</div>
+                                                    <div className="font-semibold">
+                                                        <Link href={`/books/${b._id}`} className="flex items-center gap-3 group">
+                                                            <p className="font-semibold link link-primary group-hover:underline truncate max-w-[260px]">
+                                                                {b?.title || "Unknown book"}
+                                                            </p>
+                                                        </Link>
+                                                    </div>
                                                     <div className="text-sm opacity-70">{b.author}</div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="font-mono text-xs">{b.genreId}</td>
+                                        <td>
+                                            {genreMap[b.genreId] || "Unknown"}
+                                        </td>
                                         <td>{b.totalPages || 0}</td>
                                         <td>{Number(b.avgRating || 0).toFixed(1)}</td>
                                         <td>{b.totalShelved || 0}</td>
