@@ -14,28 +14,37 @@ export default function LoginClient() {
 
     const router = useRouter();
     const searchParams = useSearchParams();
-    const callbackUrl = searchParams.get("callbackUrl") || "/";
+
+    const rawCallbackUrl = searchParams.get("callbackUrl") || "/";
+    const callbackUrl = rawCallbackUrl.startsWith("/") ? rawCallbackUrl : "/";
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError("");
 
-        const res = await signIn("credentials", {
-            email,
-            password,
-            redirect: false,
-            callbackUrl,
-        });
+        try {
+            const res = await signIn("credentials", {
+                email,
+                password,
+                redirect: false,
+                callbackUrl,
+            });
 
-        setLoading(false);
+            if (res?.error) {
+                setError("Invalid email or password");
+                return;
+            }
 
-        if (res?.error) {
-            setError("Invalid email or password");
-            return;
+            const target = (res?.url && new URL(res.url).pathname + new URL(res.url).search) || callbackUrl;
+
+            router.replace(target);
+            router.refresh();
+        } catch (err) {
+            setError("Login failed. Please try again.");
+        } finally {
+            setLoading(false);
         }
-
-        router.push(callbackUrl);
     };
 
     return (
@@ -79,9 +88,7 @@ export default function LoginClient() {
 
                         <div className="mt-auto pt-6">
                             <div className="alert">
-                <span className="text-sm">
-                  Tip: Use a strong password and keep your account safe.
-                </span>
+                                <span className="text-sm">Tip: Use a strong password and keep your account safe.</span>
                             </div>
                         </div>
                     </div>

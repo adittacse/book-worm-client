@@ -104,6 +104,7 @@ export const authOptions = {
                 token.accessToken = user.accessToken;
             }
             if (user?.role) {
+                console.log("user role", user?.role);
                 token.role = user.role;
             }
             if (user?.email) {
@@ -111,7 +112,9 @@ export const authOptions = {
             }
 
             // default role
-            if (!token.role) token.role = "user";
+            if (!token.role) {
+                token.role = "user";
+            }
 
             return token;
         },
