@@ -3,7 +3,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ---
 
 ## 🚀 Live Website
-🔗 **Live URL:** https://public-infrastructure-74101.web.app
+🔗 **Live URL:** https://book-worm-client-mu.vercel.app
 
 ---
 
